@@ -1,0 +1,43 @@
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+  outline: inherit;
+}
+html {
+  outline: none;
+  box-sizing: border-box;
+  background: @background-color;
+}
+body {
+  background: transparent;
+  font-family: @base-font-family;
+}
+.clearfix {
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.hidden {
+  text-indent: -9999px;
+  visibility: hidden;
+  display: none;
+}
+
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+#wrapper {
+  min-height: 100%;
+}

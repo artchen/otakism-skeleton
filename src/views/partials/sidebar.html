@@ -1,0 +1,27 @@
+<md-sidenav 
+  class="md-sidenav-left sidebar" 
+  md-component-id="sidebar" 
+  md-whiteframe="4">
+
+  <md-list ng-cloak>
+    <md-list-item class="md-2-line" ng-click="jump('https://about.me/hermitage')">
+      <img src="/img/avatar.jpg" class="md-avatar" alt="Art Chen" />
+      <div class="md-list-item-text" layout="column">
+        <h3>Art Chen</h3>
+        <p>About me</p>
+      </div>
+      <md-icon class="md-secondary material-icon">arrow_forward</md-icon>
+    </md-list-item>
+    <md-list-item 
+      ng-repeat="item in menu"
+      ng-click="jump(item.url, '_blank')">
+      <md-icon class="icon material-icon">{{item.icon}}</md-icon>
+      <p>{{item.name}}</p>
+    </md-list-item>
+    <md-list-item class="close-sidebar" ng-click="toggleSidebar()">
+      <md-icon class="icon material-icon">close</md-icon>
+      <p>Close</p>
+    </md-list-item>
+  </md-list>
+  
+</md-sidenav>
