@@ -15,37 +15,37 @@ var path = {
     'src/data/**'
   ],
   HTML: [
-  	'src/*.html', 
-  	'src/views/**/*.html', 
-  	'src/views/*.html',
-  	'src/fonts/**/*',
-  	'src/favicon.ico'
+    'src/*.html',
+    'src/views/**/*.html',
+    'src/views/*.html',
+    'src/fonts/**/*',
+    'src/favicon.ico'
   ],
   JS: [
-  	'src/js/*.js', 
-  	'src/js/**/*.js'
+    'src/js/*.js',
+    'src/js/**/*.js'
   ],
   CSS: [
-	  'node_modules/angular-material/angular-material.css'
+    'node_modules/angular-material/angular-material.css'
   ],
   LESS: [
-  	'src/less/style.less'
+    'src/less/style.less'
   ],
   LESS_WATCH: [
-  	'src/less/*.less',
-  	'src/less/**/*.less'
+    'src/less/*.less',
+    'src/less/**/*.less'
   ],
   IMG: [
     'src/img/**'
   ],
   VENDOR: [
-  	'node_modules/angular/angular.js', 
-  	'node_modules/angular-aria/angular-aria.js',
-	  'node_modules/angular-animate/angular-animate.js', 
+    'node_modules/angular/angular.js',
+    'node_modules/angular-aria/angular-aria.js',
+    'node_modules/angular-animate/angular-animate.js',
     'node_modules/angular-sanitize/angular-sanitize.js',
     'node_modules/angular-material/angular-material.js',
-	  'node_modules/angular-ui-router/release/angular-ui-router.js',
-	  'node_modules/angular-loading-bar/build/loading-bar.js'
+    'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/angular-loading-bar/build/loading-bar.js'
   ],
   DIST: 'public'
 };
@@ -53,7 +53,9 @@ var path = {
 var all_tasks = ['lint', 'less', 'vendor', 'js', 'html', 'img', 'data'];
 
 gulp.task('clean', function() {
-  return gulp.src(path.DIST + '/*', {read: false})
+  return gulp.src(path.DIST + '/*', {
+      read: false
+    })
     .pipe(clean());
 });
 
@@ -64,7 +66,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('less', function () {
+gulp.task('less', function() {
   gulp.src(path.LESS)
     .pipe(less())
     .pipe(cleanCSS())
@@ -75,28 +77,30 @@ gulp.task('less', function () {
     .pipe(gulp.dest(path.DIST + '/css'));
 });
 
-gulp.task('js', function () {
+gulp.task('js', function() {
   gulp.src(path.JS)
-  	.pipe(sourcemaps.init())
-	  .pipe(concat('app.js'))
-	  .pipe(ngAnnotate())
-	  .pipe(uglify())
-	.pipe(sourcemaps.write())
+    .pipe(sourcemaps.init())
+    .pipe(concat('app.js'))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(path.DIST + '/js'));
 });
 
-gulp.task('vendor', function () {
-	gulp.src(path.VENDOR)
-  	.pipe(concat('vendor.js'))
+gulp.task('vendor', function() {
+  gulp.src(path.VENDOR)
+    .pipe(concat('vendor.js'))
     .pipe(gulp.dest(path.DIST + '/js'));
 });
 
 gulp.task('html', function() {
-  gulp.src(path.HTML, {base: 'src'})
+  gulp.src(path.HTML, {
+      base: 'src'
+    })
     .pipe(gulp.dest(path.DIST));
 });
 
-gulp.task('img', function(){
+gulp.task('img', function() {
   gulp.src(path.IMG)
     .pipe(imagemin())
     .pipe(gulp.dest(path.DIST + '/img'));
@@ -107,8 +111,8 @@ gulp.task('data', function() {
     .pipe(gulp.dest(path.DIST + "/data"));
 });
 
-gulp.task('watch', function () {
-  gulp.watch(path.LESS_ALL, ['less']);
+gulp.task('watch', function() {
+  gulp.watch(path.LESS_WATCH, ['less']);
   gulp.watch(path.VENDOR, ['vendor']);
   gulp.watch(path.JS, ['lint', 'js']);
   gulp.watch(path.HTML, ['html']);
